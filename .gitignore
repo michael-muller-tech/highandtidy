@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Virtual Environment
-highandtidy/
+env/
 
 # Database files
 *.sqlite3
