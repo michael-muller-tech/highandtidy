@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'highandtidy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'highandtidy_initialtest20240107',
+        'NAME': 'djangodev20240108',
         'USER': 'michael',
         'PASSWORD': 'michael',
         'HOST': 'localhost',
