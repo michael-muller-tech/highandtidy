@@ -79,8 +79,8 @@ DATABASES = {
         'NAME': 'djangodev20240108',
         'USER': 'michael',
         'PASSWORD': 'michael',
-        'HOST': 'localhost',
-        'PORT': ''
+        'HOST': os.getenv('DATABASE_HOST', '')
+        'PORT': '5432'
     }
 }
 
