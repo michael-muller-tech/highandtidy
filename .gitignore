@@ -12,3 +12,5 @@ venv/*
 
 # OS generated files
 .DS_Store
+
+.env
