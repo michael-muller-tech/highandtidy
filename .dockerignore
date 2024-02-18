@@ -7,3 +7,6 @@ env
 venv
 .git
 .dockerignore
+.venv
+.git
+.gitignore

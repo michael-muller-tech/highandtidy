@@ -1,29 +1,14 @@
-version: '3.8'
+version: '3'
 
 services:
-  db:
-    image: postgres:latest
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   web:
     build: .
-    command: python manage.py runserver localhost:8000
-    volumes:
-      - .:/app
     ports:
-      - 8000:8000
-    depends_on:
-      - db
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
     environment:
-      DEBUG: 'true'  # Set to 'false' in production
-      DB_NAME: ${POSTGRES_DB}
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_HOST: db
-      DB_PORT: 5432
-volumes:
-  pgdata:
+      - POSTGRES_DB=highandtidy-postgres
+      - POSTGRES_USER=highandtidy
+      - POSTGRES_PASSWORD=Benzema1985
