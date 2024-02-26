@@ -1,39 +1,40 @@
 from django.db import models
 
-# Create your models here.
 class Users(models.Model):
-    firstname = models.CharField(max_length=45, null=True)
-    lastname = models.CharField(max_length=45, null=True)
-    email = models.CharField(max_length=100, null=True)
-    userid = models.IntegerField(null=True)
-    description = models.TextField(null=True)
+    firstname = models.CharField(max_length=45)
+    lastname = models.CharField(max_length=45)
+    email = models.EmailField(max_length=100)
+    # Use AutoField as primary key
+    userid = models.AutoField(primary_key=True)
+    description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
-    tasks_completed = models.IntegerField(null=True)
-    tasks_created = models.IntegerField(null=True)
-    isadmin = models.BooleanField(null=True)
-    householdid = models.IntegerField(null=True)
+    tasks_completed = models.IntegerField(default=0)
+    tasks_created = models.IntegerField(default=0)
+    is_admin = models.BooleanField(default=False)
+    householdid = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.firstname
+        return f"{self.firstname} {self.lastname}"
 
 class Tasks(models.Model):
-    taskid = models.IntegerField(null=True)
-    name = models.CharField(max_length=45, null=True)
-    description = models.CharField(max_length=200, null=True)
-    iscustom = models.BooleanField(null=True)
-    taskcreated = models.DateTimeField(null=True)
+    # Use AutoField as primary key
+    taskid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=45)
+    description = models.CharField(max_length=200, null=True, blank=True)
+    is_custom = models.BooleanField(default=False)
+    task_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
     
 
 class Householdtasks(models.Model):
-    taskid = models.IntegerField(null=True)
-    taskname = models.CharField(max_length=45, null=True)
-    createdby = models.CharField(max_length=45, null=True)
-    timescompleted = models.IntegerField(null=True)
+    # Use AutoField as primary key
+    householdtaskid = models.AutoField(primary_key=True)
+    task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
+    createdby = models.ForeignKey(Users, on_delete=models.CASCADE)
+    times_completed = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.taskname
-
+        return self.task.name

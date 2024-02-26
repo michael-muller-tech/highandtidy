@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'highandtidycomponent1',
-    'debug_toolbar'
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_DB', ''),
         'USER': os.environ.get('POSTGRES_USER', ''),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': '172.17.0.2',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
