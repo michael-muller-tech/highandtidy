@@ -14,3 +14,6 @@ def signup(request):
 
 def login(request):
     return render(request, 'login.html')
+
+def addtask(request):
+    return render(request, 'addtask.html')    

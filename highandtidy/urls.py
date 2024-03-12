@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from highandtidycomponent1.views import sayhello, guest, login, signup
+from highandtidycomponent1.views import sayhello, guest, login, signup, addtask
 import debug_toolbar
 
 urlpatterns = [
@@ -28,4 +28,5 @@ urlpatterns = [
     path('guest/', guest),
     path('login/', login),
     path('signup/', signup),
+    path('addtask', addtask),
 ]
