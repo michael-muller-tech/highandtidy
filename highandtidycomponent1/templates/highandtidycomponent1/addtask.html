@@ -19,8 +19,14 @@
 
 <body>
 
-<div>Add your task here!</div>
-
+  <h2>Add your task!</h2>
+  <form action="/submit/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <label for="taskname">Enter your task:</label><br>
+    <input id="yourtask" type="text" maxlength="100" required>
+    <input type="submit">
+  </form>
 </body>
 
 </html>

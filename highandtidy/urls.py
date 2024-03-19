@@ -17,16 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from highandtidycomponent1.views import sayhello, guest, login, signup, addtask
+from highandtidycomponent1 import views
 import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('highandtidycomponent1/', include('highandtidycomponent1.urls')),
-    path('hello/', sayhello),
     path('__debug__/', include(debug_toolbar.urls)),
-    path('guest/', guest),
-    path('login/', login),
-    path('signup/', signup),
-    path('addtask', addtask),
+    path('app/', include('highandtidycomponent1.urls')),
 ]
