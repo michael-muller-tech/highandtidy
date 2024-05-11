@@ -1,5 +1,9 @@
 from django.db import models
 
+
+class Households(models.Model):
+    household_id = models.AutoField(primary_key=True)
+
 class Users(models.Model):
     firstname = models.CharField(max_length=45)
     lastname = models.CharField(max_length=45)
@@ -12,7 +16,7 @@ class Users(models.Model):
     tasks_completed = models.IntegerField(default=0)
     tasks_created = models.IntegerField(default=0)
     is_admin = models.BooleanField(default=False)
-    householdid = models.IntegerField(null=True, blank=True)
+    household_id = models.ForeignKey(Households, on_delete=models.CASCADE, default=False)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
@@ -28,13 +32,18 @@ class Tasks(models.Model):
     def __str__(self):
         return self.name
     
-
-class Householdtasks(models.Model):
-    # Use AutoField as primary key
-    householdtaskid = models.AutoField(primary_key=True)
+class Assignment(models.Model):
+    assignment_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
     task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
-    createdby = models.ForeignKey(Users, on_delete=models.CASCADE)
-    times_completed = models.IntegerField(default=0)
+    household = models.ForeignKey(Households, on_delete = models.CASCADE)
+    assignment_name = models.CharField(max_length=45)
 
     def __str__(self):
-        return self.task.name
+        return self.assignment_name
+    
+    def save(self, *args, **kwargs):
+        #Auto-populate assignment name with the name of the associated task 
+        self.assignment_name = self.task.name
+        super().save(*args, **kwargs)
+
