@@ -3,6 +3,7 @@ from django.db import models
 
 class Households(models.Model):
     household_id = models.AutoField(primary_key=True)
+    household_name = models.CharField(max_length=45, default=0)
 
 class Users(models.Model):
     firstname = models.CharField(max_length=45)

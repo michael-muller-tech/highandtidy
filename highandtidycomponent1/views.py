@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tasks
-from .forms import taskForm
+from .forms import TaskForm
 
 
 def sayhello(request):
@@ -19,13 +19,13 @@ def login(request):
 
 def addtask(request):
     if request.method == "POST":
-        form = taskForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
             task_instance = form.save(commit=False) #Create instance
             task_instance.save() #Save instance
             return HttpResponseRedirect("/thanks/")
     else:
-        form = taskForm()
+        form = TaskForm()
     return render(request, "highandtidycomponent1/addtask.html", {"form": form})
 
 def test5(request):
