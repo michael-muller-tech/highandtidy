@@ -1,0 +1,17 @@
+table {
+    width: 60%; /* Adjust the width as needed */
+    border-collapse: collapse;
+    margin: 40px; /* Center the table */
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    overflow-wrap: break-word; /* Allow text wrapping */
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  

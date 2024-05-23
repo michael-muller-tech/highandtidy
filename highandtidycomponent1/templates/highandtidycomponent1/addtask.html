@@ -14,17 +14,40 @@
   <meta name="description" content="" />
 
   <link rel="icon" href="{% static 'favicon.ico' %}">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesaddtask.css' %}">
 
 </head>
 
 <body>
 
-  <h2>Add your task!</h2>
+  <h2>Add or delete your task!</h2>
   <form action="/app/addtask/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
   </form>
+
+  <h2>Existing Tasks:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>taskid</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.taskid }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 </body>
 
 </html>

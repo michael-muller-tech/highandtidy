@@ -1,26 +1,41 @@
 <!DOCTYPE html>
-{% load static %}
-
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8" />
-
-  <title>High and Tidy Cleaning App!</title>
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <meta name="description" content="" />
-
-  <link rel="icon" href="{% static 'favicon.ico' %}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks for Your Submission</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/stylesthanks.css' %}">
 </head>
-
 <body>
+    <div class="container">
+        <div class="content">
+            <h1>Thanks for Your Submission!</h1>
+            <p>We appreciate your contribution. Your submission has been received.</p>
+            <img src="https://i.pinimg.com/736x/09/b8/e4/09b8e48ac4579285260725ee4139c366.jpg" alt="Thank You Image" width="300" length="500">
+            <br>
+            <a href="/app/addtask" class="button">Go Back</a>
+        </div>
+    </div>
 
-<div>Thanks for that! Your choice has been saved.</div>
-
+    <h2>Existing Tasks:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>taskid</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.taskid }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 </body>
-
 </html>
