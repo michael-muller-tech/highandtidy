@@ -20,6 +20,9 @@ def login(request):
 def addtask(request):
     # Retrieve all tasks from the database
     tasks = Tasks.objects.all()
+    
+    form = TaskForm()
+    delete_form = DeleteTaskForm()
 
     if request.method == "POST":
         if 'add_task' in request.POST:  # Check if the add task form is submitted
@@ -27,17 +30,21 @@ def addtask(request):
             if form.is_valid():
                 task_instance = form.save(commit=False)
                 task_instance.save()
-                return redirect('thanks')
+                return redirect('/addtask')
+
         elif 'delete_task' in request.POST:  # Check if the delete task form is submitted
             delete_form = DeleteTaskForm(request.POST)
             if delete_form.is_valid():
-                task_id = delete_form.cleaned_data['task_id']
-                Tasks.objects.filter(taskid=task_id).delete()
-                return redirect('thanks')
+                task_id = delete_form.cleaned_data['taskid']
+                Tasks.objects.filter(taskid=taskid).delete()
+                return redirect('/addtask')
+    
     else:
         form = TaskForm()
         delete_form = DeleteTaskForm()
-
+    
+    tasks = Tasks.objects.all()
+    
     return render(request, "highandtidycomponent1/addtask.html", {"form": form, "delete_form": delete_form, "tasks": tasks})
 
 

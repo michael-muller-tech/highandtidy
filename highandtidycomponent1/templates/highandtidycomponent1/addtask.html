@@ -21,12 +21,28 @@
 
 <body>
 
+
+
   <h2>Add or delete your task!</h2>
   <form action="/app/addtask/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <button type="submit" name="add_task">Add Task!</button>
   </form>
+
+  <div class="ContainerForm">
+    <form action="/app/addtask/" method="post">
+        {% csrf_token %}
+        {{ delete_form.non_field_errors }}
+        <label for="{{ delete_form.taskid.id_for_label }}">Task ID:</label>
+        {{ delete_form.taskid }}
+        {{ delete_form.taskid.errors }}
+        <button type="submit" name="delete_task">Submit</button>
+    </form>
+</div>
+
+
+
 
   <h2>Existing Tasks:</h2>
   <table>
