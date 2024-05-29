@@ -4,7 +4,7 @@ from .models import Tasks
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        fields = ['name', 'description', 'taskid',]
+        fields = ['name', 'description', 'taskid']
 
 class DeleteTaskForm(forms.ModelForm):
     class Meta:

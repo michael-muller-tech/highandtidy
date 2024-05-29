@@ -35,7 +35,7 @@ def addtask(request):
         elif 'delete_task' in request.POST:  # Check if the delete task form is submitted
             delete_form = DeleteTaskForm(request.POST)
             if delete_form.is_valid():
-                task_id = delete_form.cleaned_data['taskid']
+                taskid = delete_form.cleaned_data['taskid']
                 Tasks.objects.filter(taskid=taskid).delete()
                 return redirect('/addtask')
     
