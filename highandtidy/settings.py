@@ -135,5 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [
     '127.0.0.1',
-    '192.168.178.2',
+    os.environ.get('LOCAL_IP', ''),,
 ]
