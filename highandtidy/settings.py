@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'highandtidycomponent1',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +85,8 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_DB', ''),
         'USER': os.environ.get('POSTGRES_USER', ''),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': '192.168.178.12',
-        'PORT': '5432',
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
     }
 }
 
@@ -135,5 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [
     '127.0.0.1',
-    os.environ.get('LOCAL_IP', ''),,
+    os.environ.get('LOCAL_IP', ''),
 ]
