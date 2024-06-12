@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 load_dotenv()
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6ig=!kd*!h2@o_a*yoju9te*te_*l=!o4ep-vnk%!&h$@k*5!&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.178.2']
 
@@ -82,6 +83,7 @@ WSGI_APPLICATION = 'highandtidy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+<<<<<<< HEAD
         'NAME': os.environ.get('POSTGRES_DB', ''),
         'USER': os.environ.get('POSTGRES_USER', ''),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
@@ -91,6 +93,12 @@ DATABASES = {
 =======
         'IP_ADDRESS': os.environ.get('DB_HOST', ''),
         'PORT': os.environ.get('DB_PORT', '')
+>>>>>>> dev
+=======
+        "OPTIONS": {
+            "service": "postgres_details",
+            "passfile": ".env",
+        }
 >>>>>>> dev
     }
 }
