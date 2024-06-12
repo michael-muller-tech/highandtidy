@@ -1,0 +1,4 @@
+[postgres_details]
+host=192.168.178.12
+user=highandtidy
+dbname=highandtidydev
