@@ -11,12 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
 import os
-load_dotenv()
 from decouple import config
 
 
+                
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6ig=!kd*!h2@o_a*yoju9te*te_*l=!o4ep-vnk%!&h$@k*5!&'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.178.2']
 
@@ -83,11 +82,12 @@ WSGI_APPLICATION = 'highandtidy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "OPTIONS": {
-            "service": "postgres_details",
-            "passfile": ".env",
-        }
+        "ENGINE": 'django.db.backends.postgresql',
+        "NAME": config('DATABASE_NAME'),
+        "USER": config('DATABASE_USER'),
+        "PASSWORD": config('DATABASE_PASSWORD'),
+        "HOST": config('DATABASE_HOST'),
+        "PORT": config('DATABASE_PORT'),
     }
 }
 
