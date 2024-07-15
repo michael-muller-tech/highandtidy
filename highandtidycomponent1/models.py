@@ -31,7 +31,7 @@ class Tasks(models.Model):
     task_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - Description: {self.description}'
     
 class Assignment(models.Model):
     assignment_id = models.AutoField(primary_key=True)
