@@ -24,18 +24,14 @@
 
 
   <h2>Add or delete your task!</h2>
-  <form action="/app/addtask/" method="post">
+  <form action="{% url 'crud-redirect' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>{{ form.name.label_tag }} {{ form.name }}</p>
+    <p>{{ form.description.label_tag }} {{ form.description }}</p>
+    <p>{{ form.is_custom.label_tag }} {{ form.is_custom }}</p>
     <button type="submit" name="add_task">Add Task!</button>
   </form>
 
-
-  <form action="/app/addtask/" method="post">
-        {% csrf_token %}
-        {{ delete_form.as_p }}
-        <button type="submit" name="delete_task">Delete Task!</button>
-   </form>
 
   <h2>Existing Tasks:</h2>
   <table>
@@ -44,6 +40,9 @@
         <th>Name</th>
         <th>Description</th>
         <th>taskid</th>
+        <th>is_custom</th>
+        <th>task_created</th>
+        <th>Delete task</th>
       </tr>
     </thead>
     <tbody>
@@ -52,8 +51,21 @@
           <td>{{ task.name }}</td>
           <td>{{ task.description }}</td>
           <td>{{ task.taskid }}</td>
+          <td>{{ task.is_custom }}</td>
+          <td>{{ task.task_created }}</td>
+          <td>
+            <form action="/app/addtask/" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="taskid" value="{{ task.taskid }}">
+            <button type="submit" name="delete_task">Delete Task!</button>
+          </td>
         </tr>
       {% endfor %}
+
+
+
+
+      </form>
     </tbody>
   </table>
 

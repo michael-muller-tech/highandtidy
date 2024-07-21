@@ -7,7 +7,7 @@ urlpatterns = [
     path('guest/', views.guest),
     path('login/', views.login),
     path('signup/', views.signup),
-    path('addtask/', views.addtask),
+    path('addtask/', views.crudtask, name='crud-redirect'),
     path('test5/', views.test5),
     path('thanks/', views.thanks, name='thanks'),
     path('', views.homepage, name='homepage'),

@@ -6,18 +6,18 @@ from .forms import TaskForm, DeleteTaskForm
 
 def sayhello(request):
     data = {'name': 'Michael'}
-    return render(request, 'highandtidycomponent1/hello.html', data)
+    return render(request, 'hello.html', data)
 
 def guest(request):
-    return render(request, 'highandtidycomponent1/guest.html')
+    return render(request, 'guest.html')
 
 def signup(request):
-    return render(request, 'highandtidycomponent1/signup.html')
+    return render(request, 'signup.html')
 
 def login(request):
-    return render(request, 'highandtidycomponent1/login.html')
+    return render(request, 'login.html')
 
-def addtask(request):
+def crudtask(request):
     # Retrieve all tasks from the database
     tasks = Tasks.objects.all()
     
@@ -28,31 +28,35 @@ def addtask(request):
         if 'add_task' in request.POST:  # Check if the add task form is submitted
             form = TaskForm(request.POST)
             if form.is_valid():
-                task_instance = form.save(commit=False)
-                task_instance.save()
-                return redirect('/addtask')
+                form.save()
+                return redirect('crud-redirect')
 
         elif 'delete_task' in request.POST:  # Check if the delete task form is submitted
             delete_form = DeleteTaskForm(request.POST)
             if delete_form.is_valid():
-                taskid = delete_form.cleaned_data['taskid']
-                Tasks.objects.filter(taskid=taskid).delete()
-                return redirect('/addtask')
+                taskid = delete_form.cleaned_data.get['taskid']
+                try:
+                    task = Tasks.objects.get(taskid=taskid)
+                    task.delete()
+                    messages.success(request, 'Task deleted successfully')
+                except Task.DoesNotExist:
+                    messages.error(request, 'Task not found')
+                
+            else:
+                messages.error(request, 'Invalid form submission')
+               
+            
+        else:
+            messages.error(request, 'Failed to delete task.')
     
-    else:
-        form = TaskForm()
-        delete_form = DeleteTaskForm()
-    
-    tasks = Tasks.objects.all()
-    
-    return render(request, "highandtidycomponent1/addtask.html", {"form": form, "delete_form": delete_form, "tasks": tasks})
+    return render(request, "addtask.html", {"form": form, "tasks": tasks})
 
 
 def test5(request):
-    return render(request, 'highandtidycomponent1/test5.html')
+    return render(request, 'test5.html')
 
 def thanks(request):
-    return render(request, 'highandtidycomponent1/thanks.html')
+    return render(request, 'thanks.html')
 
 def homepage(request):
-    return render(request, 'highandtidycomponent1/homepage.html')
+    return render(request, 'homepage.html')
