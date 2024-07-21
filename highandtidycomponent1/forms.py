@@ -4,9 +4,8 @@ from .models import Tasks
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        fields = ['name', 'description', 'taskid']
+        fields = ['name', 'description', 'is_custom']
 
-class DeleteTaskForm(forms.ModelForm):
-    class Meta:
-        model = Tasks
+class DeleteTaskForm(forms.Form):
+        taskid = forms.IntegerField(widget=forms.HiddenInput())
         fields = ['taskid']
