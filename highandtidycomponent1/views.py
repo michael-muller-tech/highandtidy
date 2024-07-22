@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tasks
 from .forms import TaskForm, DeleteTaskForm
+from django.contrib import messages
 
 
 def sayhello(request):
@@ -34,12 +35,12 @@ def crudtask(request):
         elif 'delete_task' in request.POST:  # Check if the delete task form is submitted
             delete_form = DeleteTaskForm(request.POST)
             if delete_form.is_valid():
-                taskid = delete_form.cleaned_data.get['taskid']
+                taskid = delete_form.cleaned_data.get('taskid')
                 try:
                     task = Tasks.objects.get(taskid=taskid)
                     task.delete()
                     messages.success(request, 'Task deleted successfully')
-                except Task.DoesNotExist:
+                except Tasks.DoesNotExist:
                     messages.error(request, 'Task not found')
                 
             else:
