@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     path('app/', include('highandtidycomponent1.urls')),
-    path('', include('highandtidycomponent1.urls'))
+    path('', include('highandtidycomponent1.urls')),
+    path('htbackend', include('htbackend.urls')),
 ]
 
 if settings.DEBUG:
