@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Tasks, Households, Users, Assignment
 
+from .models import Tasks, Households, Users, Assignment
 
 # Register your models here.
 admin.site.register(Households)
