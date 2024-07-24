@@ -43,7 +43,8 @@
         <th>is_custom</th>
         <th>task_created</th>
         <th>Delete task</th>
-      </tr>
+        <th>Update task</th>
+        </tr>
     </thead>
     <tbody>
       {% for task in tasks %}
@@ -54,10 +55,17 @@
           <td>{{ task.is_custom }}</td>
           <td>{{ task.task_created }}</td>
           <td>
-            <form action="/app/addtask/" method="post" style="display: inline;">
+            <form action="{% url 'crud-redirect' %}" method="post" style="display: inline;">
             {% csrf_token %}
             <input type="hidden" name="taskid" value="{{ task.taskid }}">
-            <button type="submit" name="delete_task">Delete Task!</button>
+            <button type="submit" name="delete_task">Delete Task!</button></form>
+          </td>
+          <td>
+            <form action="{% url 'crud-redirect' % }" method="post" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="taskid" value="{{ task.taskid }}">
+              <button type="submit" name="update_task">Update task</button>
+            </form>
           </td>
         </tr>
       {% endfor %}

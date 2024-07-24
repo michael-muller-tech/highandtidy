@@ -9,3 +9,6 @@ class TaskForm(forms.ModelForm):
 class DeleteTaskForm(forms.Form):
         taskid = forms.IntegerField(widget=forms.HiddenInput())
         fields = ['taskid']
+
+class UpdateTaskForm(forms.Form):
+     taskid = forms.IntegerField(widget=forms.HiddenInput())

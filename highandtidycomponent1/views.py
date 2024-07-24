@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tasks
-from .forms import TaskForm, DeleteTaskForm
+from .forms import TaskForm, DeleteTaskForm, UpdateTaskForm
 from django.contrib import messages
 
 
@@ -41,13 +41,23 @@ def crudtask(request):
                     task.delete()
                     messages.success(request, 'Task deleted successfully')
                 except Tasks.DoesNotExist:
-                    messages.error(request, 'Task not found')
-                
+            
             else:
                 messages.error(request, 'Invalid form submission')
+
+
+        elif 'update_task' in request.POST:
+            update_form = UpdateTaskForm(request.POST)
+            if update_form.isvalid():
+
+
+
+                
+            elif:
+            messages.error(request, 'Invalid form submission')
                
             
-        else:
+            else:
             messages.error(request, 'Failed to delete task.')
     
     return render(request, "addtask.html", {"form": form, "tasks": tasks})
