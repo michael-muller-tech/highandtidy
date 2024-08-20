@@ -59,17 +59,17 @@ def crudtask(request):
 def temp_update(request, pk):
     task = get_object_or_404(Tasks, pk=pk)
     print(f"Task ID: {task.pk}, Name: {task.name}, Description: {task.description}, Is Custom: {task.is_custom}")
-    # Continue with your logic
+    
 
     if request.method == 'POST':
         form = UpdateTaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('crud-redirect')  # Redirect back to the task list or another page
+            return redirect('crud-redirect')  
     else:
         form = UpdateTaskForm(instance=task)
 
-    print(form['description'].value())  # Add this line before rendering the template
+    print(form['description'].value())  
 
     return render(request, 'temp_update.html', {'form': form, 'task': task})
 
