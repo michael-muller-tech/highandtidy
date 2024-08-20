@@ -10,5 +10,7 @@ class DeleteTaskForm(forms.Form):
         taskid = forms.IntegerField(widget=forms.HiddenInput())
         fields = ['taskid']
 
-class UpdateTaskForm(forms.Form):
-     taskid = forms.IntegerField(widget=forms.HiddenInput())
+class UpdateTaskForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['name', 'description', 'is_custom']

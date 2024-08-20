@@ -1,0 +1,38 @@
+<!-- templates/temp_update.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+    <style>
+        /* Your CSS styling here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Task</h1>
+        
+        <!-- Display task details -->
+        <div class="task-details">
+            <h2>Current Task Details:</h2>
+            <p><strong>Name:</strong> {{ task.name }}</p>
+            <p><strong>Description:</strong> {{ task.description }}</p>
+            <p><strong>Custom:</strong> {{ task.is_custom|yesno:"Yes,No" }}</p>
+            <p><strong>Created on:</strong> {{ task.task_created }}</p>
+        </div>
+        
+        <!-- Update form -->
+        <form method="POST">
+            {% csrf_token %}
+            <p>{{ form.name.label_tag }} {{ form.name }}</p>
+            <p>{{ form.description.label_tag }} {{ form.description }}</p>
+            <p>{{ form.is_custom.label_tag }} {{ form.is_custom }}</p>
+            <button type="submit">Update Task</button>
+        </form>
+        
+        
+        <a href="{% url 'crud-redirect' %}" class="back-link">Back to Task List</a>
+    </div>
+</body>
+</html>

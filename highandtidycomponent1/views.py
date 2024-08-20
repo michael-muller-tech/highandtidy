@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tasks
 from .forms import TaskForm, DeleteTaskForm, UpdateTaskForm
@@ -24,6 +24,7 @@ def crudtask(request):
     
     form = TaskForm()
     delete_form = DeleteTaskForm()
+    update_form = UpdateTaskForm()
 
     if request.method == "POST":
         if 'add_task' in request.POST:  # Check if the add task form is submitted
@@ -41,27 +42,36 @@ def crudtask(request):
                     task.delete()
                     messages.success(request, 'Task deleted successfully')
                 except Tasks.DoesNotExist:
-            
-            else:
-                messages.error(request, 'Invalid form submission')
+                    messages.error(request, 'Invalid form submission')
 
 
         elif 'update_task' in request.POST:
-            update_form = UpdateTaskForm(request.POST)
-            if update_form.isvalid():
-
-
-
-                
-            elif:
-            messages.error(request, 'Invalid form submission')
-               
-            
-            else:
-            messages.error(request, 'Failed to delete task.')
+            taskid = request.POST.get('taskid')
+            if taskid:
+                return redirect('temp-update', pk=taskid)
+         
+             
+        else:
+           messages.error(request, 'Failed to delete task.')
     
     return render(request, "addtask.html", {"form": form, "tasks": tasks})
 
+def temp_update(request, pk):
+    task = get_object_or_404(Tasks, pk=pk)
+    print(f"Task ID: {task.pk}, Name: {task.name}, Description: {task.description}, Is Custom: {task.is_custom}")
+    # Continue with your logic
+
+    if request.method == 'POST':
+        form = UpdateTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('crud-redirect')  # Redirect back to the task list or another page
+    else:
+        form = UpdateTaskForm(instance=task)
+
+    print(form['description'].value())  # Add this line before rendering the template
+
+    return render(request, 'temp_update.html', {'form': form, 'task': task})
 
 def test5(request):
     return render(request, 'test5.html')
