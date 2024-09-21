@@ -4,25 +4,15 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8" />
-
   <title>High and Tidy Cleaning App!</title>
-
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
   <meta name="description" content="" />
-
   <link rel="icon" href="{% static 'favicon.ico' %}">
-  
   <link rel="stylesheet" type="text/css" href="{% static 'stylesaddtask.css' %}">
-
 </head>
 
 <body>
-
-
-
   <h2>Add or delete your task!</h2>
   <form action="{% url 'crud-redirect' %}" method="post">
     {% csrf_token %}
@@ -32,19 +22,18 @@
     <button type="submit" name="add_task">Add Task!</button>
   </form>
 
-
   <h2>Existing Tasks:</h2>
   <table>
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>taskid</th>
-        <th>is_custom</th>
-        <th>task_created</th>
-        <th>Delete task</th>
-        <th>Update task</th>
-        </tr>
+        <th>Task ID</th>
+        <th>Is Custom</th>
+        <th>Task Created</th>
+        <th>Delete Task</th>
+        <th>Update Task</th>
+      </tr>
     </thead>
     <tbody>
       {% for task in tasks %}
@@ -56,27 +45,19 @@
           <td>{{ task.task_created }}</td>
           <td>
             <form action="{% url 'crud-redirect' %}" method="post" style="display: inline;">
-            {% csrf_token %}
-            <input type="hidden" name="taskid" value="{{ task.taskid }}">
-            <button type="submit" name="delete_task">Delete Task!</button></form>
-          </td>
-          <td>
-            <form action="{% url 'temp-update' task.taskid %}" method="post" style="display: inline;">
               {% csrf_token %}
               <input type="hidden" name="taskid" value="{{ task.taskid }}">
-              <button type="submit" name="update_task">Update task</button>
+              <button type="submit" name="delete_task">Delete Task!</button>
             </form>
+          </td>
+          <td>
+            <!-- Change this to a link that redirects to the update page -->
+            <a href="{% url 'temp-update' task.taskid %}">Update Task</a>
           </td>
         </tr>
       {% endfor %}
-
-
-
-
-      </form>
     </tbody>
   </table>
-
 </body>
 
 </html>
