@@ -29,6 +29,7 @@ class Tasks(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True)
     is_custom = models.BooleanField(default=False)
     task_created = models.DateTimeField(auto_now_add=True)
+    task_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.name} - Description: {self.description}'

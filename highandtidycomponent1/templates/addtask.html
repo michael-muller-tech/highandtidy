@@ -31,6 +31,7 @@
         <th>Task ID</th>
         <th>Is Custom</th>
         <th>Task Created</th>
+        <th>Task Modified</th>
         <th>Delete Task</th>
         <th>Update Task</th>
       </tr>
@@ -43,6 +44,7 @@
           <td>{{ task.taskid }}</td>
           <td>{{ task.is_custom }}</td>
           <td>{{ task.task_created }}</td>
+          <td>{{ task.task_modified }}</td>
           <td>
             <form action="{% url 'crud-redirect' %}" method="post" style="display: inline;">
               {% csrf_token %}
