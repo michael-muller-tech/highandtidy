@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Tasks
-from .forms import TaskForm, DeleteTaskForm, UpdateTaskForm
+from .forms import TaskForm, DeleteTaskForm, UpdateTaskForm, AuthenticationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login
 
 
 def sayhello(request):
@@ -16,7 +17,23 @@ def signup(request):
     return render(request, 'signup.html')
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)  # Corrected line
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+                    
+            if user is not None:
+                auth_login(request, user)
+                return redirect('login')
+            else:
+                return render(request, 'login.html', {'form': form, 'error': 'Invalid login credentials'})
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'login.html', {'form': form})
+
 
 def crudtask(request):
     # Retrieve all tasks from the database

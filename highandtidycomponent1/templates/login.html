@@ -1,34 +1,28 @@
 <!DOCTYPE html>
-{% load static %}
-
 <html lang="en">
 
 <head>
-
-  <meta charset="UTF-8" />
-
-  <title>High and Tidy Cleaning App!</title>
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <meta name="description" content="" />
-
-  <link rel="icon" href="{% static 'favicon.ico' %}">
-
+    <meta charset="UTF-8" />
+    <title>High and Tidy Cleaning App!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
+    <h1>Hello, {{ name }}!</h1>
 
-  <h1>Hello, {{ name }}!</h1>
-
-  <div>If you are new, click <a href="/guest">HERE</a> to take a tour. 
-
-    Otherwise click <a href="/app/login">HERE</a> to log in or click <a href="/app/signup">HERE</a> to sign up.</div>
-    <br>
-    <br>
-
-  <img src="{% static '20240115-highandtidy4.png' %}" alt="High and Tidy" width="400" height="400">
-
+    <h2>Authentication Form</h2>
+    
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- This renders all form fields -->
+        
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
+    </form>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
 </body>
 
 </html>

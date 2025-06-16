@@ -16,3 +16,4 @@ venv/*
 
 *.env
 *.save
+env_terminal.txt

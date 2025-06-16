@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('hello/', views.sayhello),
     path('guest/', views.guest),
-    path('login/', views.login),
+    path('login/', views.login, name='login'),
     path('signup/', views.signup),
     path('addtask/', views.crudtask, name='crud-redirect'),
     path('test5/', views.test5),
